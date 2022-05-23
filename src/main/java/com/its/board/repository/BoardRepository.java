@@ -11,7 +11,7 @@ import java.util.List;
 public class BoardRepository {
     @Autowired
     private SqlSessionTemplate sql;
-    public int titleSave(BoardDTO boardDTO) {
+    public int save(BoardDTO boardDTO) {
         System.out.println("Repository boardDTO = " + boardDTO);
         return sql.insert("Board.titleSave", boardDTO);
     }

@@ -11,8 +11,8 @@ import java.util.List;
 public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
-    public boolean titleSave(BoardDTO boardDTO) {
-       int saveResult =  boardRepository.titleSave(boardDTO);
+    public boolean save(BoardDTO boardDTO) {
+       int saveResult =  boardRepository.save(boardDTO);
        if(saveResult > 0) {
            return true;
        }else {

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -16,26 +17,28 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @GetMapping("/save")
-    public String save() {
-        return "save";
+    //글쓰기 화면 요청
+    @GetMapping("/board/save")
+    public String saveForm() {
+        return "/board/save"; // => views/board/save.jsp 라는 곳에 위치한 파일을 찾음
     }
-
-    @PostMapping("/save")
-    public String titleSave(@ModelAttribute BoardDTO boardDTO) {
+    // 글작성 메서드
+    @PostMapping("/board/save")
+    public String save(@ModelAttribute BoardDTO boardDTO) {
         System.out.println("boardDTO = " + boardDTO);
-        boolean saveResult = boardService.titleSave(boardDTO);
+        boolean saveResult = boardService.save(boardDTO);
         if (saveResult) {
-            return "list";
+            return "redirect:/board/findAll";
         } else {
             return "index";
         }
     }
 
-    @GetMapping ("/findAll")
+    // 글목록조회 메서드
+    @GetMapping ("/board/findAll")
     public String findAll(Model model) {
         List<BoardDTO>boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
-        return "list";
+        return "board/list";
     }
 }
