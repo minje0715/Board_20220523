@@ -20,6 +20,7 @@
     <table class="table">
         <tr>
             <th>글번호</th>
+            <th>글제목</th>
             <th>작성자</th>
             <th>비밀번호</th>
             <th>내용</th>
@@ -31,12 +32,15 @@
         <c:forEach items="${boardList}" var="board">
             <tr>
                 <td>${board.id}</td>
+                <td>${board.boardTitle}</td>
                 <td>${board.boardWriter}</td>
                 <td>${board.boardPassword}</td>
                 <td>${board.boardContents}</td>
                 <td>${board.boardHits}</td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
                                     value="${board.boardCreatedDate}"></fmt:formatDate></td>
+                <td><a href="/detail?id=${board.id}">조회</a></td>
+                <td><a href="/delete?id=${board.id}">삭제</a></td>
             </tr>
         </c:forEach>
     </table>
